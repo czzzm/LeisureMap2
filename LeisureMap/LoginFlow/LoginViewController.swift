@@ -8,8 +8,8 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
-
+class LoginViewController: UIViewController, UITextFieldDelegate,AsyncReponseDelegate {
+    var requestWorker:AsyncRequestWorker?
     @IBOutlet weak var txtAccount: UITextField!
     
     @IBOutlet weak var txtPassword: UITextField!
@@ -18,11 +18,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        requestWorker = AsyncRequestWorker()
+        requestWorker?.reponseDelegate = self
+        
+        
     }
     
-
+    @IBAction func btnLoginClicked(_ sender: Any) {
+        var account = txtAccount.text!
+        var password = txtPassword.text!
+        let from = "https://score.azurewebsites.net/api/login/\(account)/\(password)"
+        self.requestWorker?.getResponse(from: from, tag: 1)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewWillDisappear")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         // a
@@ -80,5 +103,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-
+    // MARK: AsyncResponseDelegate
+    
+    func receviedReponse(_ sender: AsyncRequestWorker, responseString: String, tag: Int) {
+        print(responseString)
+        
+        //
+//        let defaults : UserDefaults = UserDefaults.standard
+//
+//        defaults.set(responseString, forKey: "serviceVersion")
+//
+//        defaults.synchronize()
+//
+//        DispatchQueue.main.async {
+//            self.performSegue(withIdentifier: "moveToLoginViewSegue", sender: self)
+        }
+        
 }

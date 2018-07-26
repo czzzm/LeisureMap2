@@ -4,8 +4,7 @@
 //
 //  Created by stu1 on 2018/7/23.
 //  Copyright © 2018年 tripim. All rights reserved.
-//
-
+//{"Name":"使用者一","Phone":"13213215895","LoginContent":"account:a;password:a"}
 import UIKit
 
 class SplashViewController: UIViewController, AsyncReponseDelegate {
