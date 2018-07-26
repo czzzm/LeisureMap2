@@ -20,9 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate,AsyncReponseDel
         super.viewDidLoad()
         requestWorker = AsyncRequestWorker()
         requestWorker?.reponseDelegate = self
-        
-        
-    }
+        }
     
     @IBAction func btnLoginClicked(_ sender: Any) {
         var account = txtAccount.text!
